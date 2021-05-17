@@ -6,6 +6,14 @@ pipeline {
         label 'pipeline-base-container'
     }
 
+    // For a single pipline job the branch name has to be resolved manually.
+    environment {
+        def BRANCH_NAME = scm.branches[0].name
+        if (BRANCH_NAME.contains("*/")) {
+            BRANCH_NAME = BRANCH_NAME.split("\\*/")[1]
+        }
+    }
+
     stages {
         stage('Undeploy application') { steps { container(name: 'helm') { script {
             echo "Undeploying application from ${env.BRANCH_NAME}..."
