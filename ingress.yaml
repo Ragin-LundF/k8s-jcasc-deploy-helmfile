@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: k8s-jcasc-app
+  namespace: demo-dev
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - http:
+        paths:
+          # adding the application to ingress routing
+          - path: /(.*)
+            backend:
+              serviceName: k8s-jcasc-app
+              servicePort: 81

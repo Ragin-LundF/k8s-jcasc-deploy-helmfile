@@ -1,0 +1,23 @@
+# reference to the helm repository, which was defined in the helmfile.
+helmRepository: "k8s-jcasc-app-snapshot"
+# target namespace for the deployment of this environment.
+targetNamespace: "demo-preview"
+# support for non-released applications
+supportSnapshots: true
+
+# List of all application helm charts which should be deployed in the namespace
+charts:
+  # this key is used for the deployment name
+  k8s-jcasc-app-example:
+    # chart name of the application
+    chartName: "k8s-jcasc-app-example"
+    # version of the chart which should be used for deployment.
+    # If not set, it deploys the latest verion, if it uses semver versioning.
+    # chartVersion: "1.0.0"
+  pgadmin:
+    # chart name of pgadmin
+    chartName: "pgadmin"
+    helmRepository: "cetic"
+  postgres:
+    chartName: "postgresql"
+    helmRepository: "stable"

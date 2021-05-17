@@ -1,0 +1,8 @@
+persistence:
+  enable: false
+  storageClass: hostpath
+service:
+  type: ClusterIP
+pgadmin:
+  username: k8s-example@domain.tld
+  password: test

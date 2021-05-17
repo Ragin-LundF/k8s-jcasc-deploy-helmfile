@@ -1,0 +1,5 @@
+postgresqlUsername: "example"
+postgresqlPassword: "app"
+postgresqlDatabase: "k8sjcascexampleapp"
+persistence:
+  enabled: false

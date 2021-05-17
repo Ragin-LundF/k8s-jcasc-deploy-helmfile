@@ -1,0 +1,66 @@
+# Repository for deployments with helmfile
+# https://github.com/roboll/helmfile
+#
+repositories:
+  # Stable repository for official helm charts
+  - name: "k8s-jcasc-app-releases"
+    url: "https://localhost/helmfiles/releases"
+    username: {{ env "HELM_USERNAME" | default "" }}
+    password: {{ env "HELM_PASSWORD" | default "" }}
+  # snapshot repositories for development deployments of helm charts
+  - name: "k8s-jcasc-app-snapshots"
+    url: "https://localhost/helmfiles/releases"
+    username: {{ env "HELM_USERNAME" | default "" }}
+    password: {{ env "HELM_PASSWORD" | default "" }}
+  # official helm chart repository
+  - name: "stable"
+    url: "https://kubernetes-charts.storage.googleapis.com"
+  # cetic contains some postgres helm charts (e.g. pgAdmin)
+  - name: "cetic"
+    url: "https://cetic.github.io/helm-charts"
+
+# defaults for helmfile
+helmDefaults:
+  force: true
+  tillerless: true
+  recreatePods: true
+
+# Definition of the deployment environments
+environments:
+  dev:
+    values:
+      - environments/env-dev.yaml
+  qa:
+    values:
+      - environments/env-qa.yaml
+  preview:
+    values:
+      - environments/env-preview.yaml
+
+# Helm Releases
+releases:
+    # Save .Environment.Name as $environmentName and .Values as $values in the context of helmfile.
+    # This is required, because in Go templates inside of a "range" these values cannot accessed.
+    {{- $environmentName := .Environment.Name -}}
+    {{- $values := .Values -}}
+
+    # iterate over all charts, which are defined at .Values.charts and define their releases
+    {{- range $key, $value := .Values.charts }}
+    - name: {{ $key }}-{{ $environmentName }}
+      # define the chart. If a chart has a special repository configured, this will be used.
+      # Else it uses the default repository of the environment
+      chart: {{- if $value.helmRepository }}{{ $value.helmRepository }}{{else}}{{ $values.helmRepository }}{{- end}}/{{ $value.chartName }}
+      {{- if hasKey $value "chartVersion" }}
+      version: {{ $value.chartVersion }}
+      {{- end }}
+      namespace: {{ $values.targetNamespace }}
+      missingFileHandler: Warn
+      {{- if $values.supportSnapshots }}
+      devel: true
+      {{- end }}
+      values:
+        # load default values
+        - config/values/{{ $value.chartName }}/values.yaml
+        # load stage specific overwrite values
+        - config/values/{{ $value.chartName }}/values.{{ $environmentName }}.yaml
+    {{- end}}
