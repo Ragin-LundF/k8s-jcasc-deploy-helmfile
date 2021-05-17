@@ -1,5 +1,5 @@
 # reference to the helm repository, which was defined in the helmfile.
-helmRepository: "k8s-jcasc-app-snapshot"
+helmRepository: "k8s-jcasc-app-reddot"
 # target namespace for the deployment of this environment.
 targetNamespace: "demo-dev"
 # support for non-released applications
@@ -10,7 +10,7 @@ charts:
   # this key is used for the deployment name
   k8s-jcasc-app-example:
     # chart name of the application
-    chartName: "k8s-jcasc-app-example"
+    chartName: "reddot"
     # version of the chart which should be used for deployment.
     # If not set, it deploys the latest verion, if it uses semver versioning.
     # chartVersion: "1.0.0"

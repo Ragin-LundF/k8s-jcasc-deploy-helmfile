@@ -9,6 +9,8 @@ More information:
 - Github [k8s-JCasC-Mgmt example project](https://github.com/Ragin-LundF/k8s-jcasc-mgmt-example)
 - Github [k8s-JCasC-app-example](https://github.com/Ragin-LundF/k8s-jcasc-app-example)
 - Github [k8s-JCasC docker containers](https://github.com/Ragin-LundF/k8s-jenkins-docker)
+- Github [k8s-JCasC helm charts example](https://github.com/Ragin-LundF/k8s-jcasc-app-helm-charts)
+- Github [k8s-JCasC helmfile deployment example](https://github.com/Ragin-LundF/k8s-jcasc-deploy-helmfile-example)
 
 # Structure
 

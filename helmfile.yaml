@@ -3,13 +3,9 @@
 #
 repositories:
   # Stable repository for official helm charts
-  - name: "k8s-jcasc-app-releases"
-    url: "https://localhost/helmfiles/releases"
-    username: {{ env "HELM_USERNAME" | default "" }}
-    password: {{ env "HELM_PASSWORD" | default "" }}
-  # snapshot repositories for development deployments of helm charts
-  - name: "k8s-jcasc-app-snapshots"
-    url: "https://localhost/helmfiles/releases"
+  # username/password is here as an example for private repositories.
+  - name: "k8s-jcasc-app-reddot"
+    url: "https://raw.githubusercontent.com/Ragin-LundF/k8s-jcasc-app-helm-charts/main/reddot"
     username: {{ env "HELM_USERNAME" | default "" }}
     password: {{ env "HELM_PASSWORD" | default "" }}
   # official helm chart repository
