@@ -8,17 +8,14 @@ pipeline {
 
     // For a single pipline job the branch name has to be resolved manually.
     environment {
-        def BRANCH_NAME = scm.branches[0].name
-        if (BRANCH_NAME.contains("*/")) {
-            BRANCH_NAME = BRANCH_NAME.split("\\*/")[1]
-        }
+        BRANCH_NAME = "${env.GIT_BRANCH.split('/').size() > 1 ? env.GIT_BRANCH.split('/')[1..-1].join('/') : env.GIT_BRANCH}"
     }
 
     stages {
         stage('Deploy application') { steps { container(name: 'helm') { script {
             echo "Deploying application to ${env.BRANCH_NAME}..."
             echo "-> sync repositories..."
-            sh "helmfile repos"
+            sh "helmfile -e ${env.BRANCH_NAME} repos"
             echo "-> deploy charts..."
             sh "helmfile -e ${env.BRANCH_NAME} apply"
         } } } }
