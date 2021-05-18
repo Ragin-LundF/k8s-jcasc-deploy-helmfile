@@ -18,6 +18,7 @@ charts:
     helmRepository: "k8s-jcasc-app-reddot"
   pgadmin:
     # chart name of pgadmin
-    chartName: "pgadmin"
+    chartName: "pgadmin4"
+    helmRepository: "runix"
   postgres:
     chartName: "postgresql"

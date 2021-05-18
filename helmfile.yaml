@@ -10,6 +10,8 @@ repositories:
   # official helm chart repository
   - name: "stable"
     url: "https://charts.helm.sh/stable"
+  - name: "runix"
+    url: "https://helm.runix.net"
 
 # defaults for helmfile
 helmDefaults:
@@ -38,15 +40,15 @@ releases:
   # iterate over all charts, which are defined at .Values.charts and define their releases
   {{ range $key, $value := .Values.charts }}
   - name: {{ $key }} # to extend the app name with env: -{{ $environmentName }}
-    disableValidation: true
-    disableValidationOnInstall: true
     # define the chart. If a chart has a special repository configured, this will be used.
     # Else it uses the default repository of the environment
     chart: {{ if hasKey $value "helmRepository" }}{{ $value.helmRepository }}{{ else }}{{ $values.helmRepository }}{{ end }}/{{ $value.chartName }}
     {{ if hasKey $value "chartVersion" }}
     version: {{ $value.chartVersion }}
     {{ end }}
+    {{ if $values.targetNamespace }}
     namespace: {{ $values.targetNamespace }}
+    {{ end }}
     missingFileHandler: Warn
     {{ if $values.supportSnapshots }}
     devel: true
