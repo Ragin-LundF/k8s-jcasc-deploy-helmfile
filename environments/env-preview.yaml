@@ -1,5 +1,5 @@
 # reference to the helm repository, which was defined in the helmfile.
-helmRepository: "k8s-jcasc-app-reddot"
+helmRepository: "stable"
 # target namespace for the deployment of this environment.
 targetNamespace: "demo-preview"
 # support for non-released applications
@@ -9,15 +9,15 @@ supportSnapshots: true
 charts:
   # this key is used for the deployment name
   k8s-jcasc-app-example:
-    # chart name of the application
+    ## chart name of the application
     chartName: "reddot"
-    # version of the chart which should be used for deployment.
-    # If not set, it deploys the latest verion, if it uses semver versioning.
+    ## version of the chart which should be used for deployment.
+    ## If not set, it deploys the latest verion, if it uses semver versioning.
     # chartVersion: "1.0.0"
+    ## Overwriting with reddot repo
+    helmRepository: "k8s-jcasc-app-reddot"
   pgadmin:
     # chart name of pgadmin
     chartName: "pgadmin"
-    helmRepository: "cetic"
   postgres:
     chartName: "postgresql"
-    helmRepository: "stable"
