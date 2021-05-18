@@ -17,7 +17,7 @@ pipeline {
             echo "-> sync repositories..."
             sh "helmfile -e ${env.BRANCH_NAME} repos"
             echo "-> deploy charts..."
-            sh "helmfile -e ${env.BRANCH_NAME} apply"
+            sh "helmfile -e ${env.BRANCH_NAME} -n demo-${env.BRANCH_NAME} apply"
         } } } }
 
         stage('Deploy ingress router') { steps { container(name: 'helm') { script {
