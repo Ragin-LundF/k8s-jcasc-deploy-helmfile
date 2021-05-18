@@ -38,7 +38,7 @@ releases:
 
     # iterate over all charts, which are defined at .Values.charts and define their releases
     {{ range $key, $value := .Values.charts }}
-    - name: {{ $key }}-{{ $environmentName }}
+    - name: {{ $key }} # to extend the app name with env: -{{ $environmentName }}
       # define the chart. If a chart has a special repository configured, this will be used.
       # Else it uses the default repository of the environment
       chart: {{ if hasKey $value "helmRepository" }}{{ $value.helmRepository }}{{ else }}{{ $values.helmRepository }}{{ end }}/{{ $value.chartName }}
