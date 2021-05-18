@@ -15,7 +15,6 @@ repositories:
 helmDefaults:
   force: true
   tillerless: true
-  recreatePods: true
 
 # Definition of the deployment environments
 environments:
