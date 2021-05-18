@@ -20,7 +20,7 @@ pipeline {
 
         stage('Undeploy ingress router') { steps { container(name: 'helm') { script {
             echo "Undeploying ingress from ${env.BRANCH_NAME}..."
-            sh "kubectl -n demo-${env.BRANCH_NAME} delete ingress.yaml"
+            sh "kubectl -n demo-${env.BRANCH_NAME} delete -f ingress.yaml"
         } } } }
     }
 }
