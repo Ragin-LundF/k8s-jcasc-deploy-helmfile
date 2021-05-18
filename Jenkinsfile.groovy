@@ -22,7 +22,7 @@ pipeline {
 
         stage('Deploy ingress router') { steps { container(name: 'helm') { script {
             echo "Deploying ingress to ${env.BRANCH_NAME}..."
-            sh "kubectl -n demo-${env.BRANCH_NAME} apply ingress.yaml"
+            sh "kubectl -n demo-${env.BRANCH_NAME} apply -f ingress.yaml"
         } } } }
     }
 }
