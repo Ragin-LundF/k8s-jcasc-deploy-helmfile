@@ -52,7 +52,7 @@ releases:
       {{ end }}
       values:
         # load default values
-        - config/values/{{ $value.chartName }}/values.yaml
+        - config/{{ $value.chartName }}/values.yaml
         # load stage specific overwrite values
-        - config/values/{{ $value.chartName }}/values.{{ $environmentName }}.yaml
+        - config/{{ $value.chartName }}/values.{{ $environmentName }}.yaml
     {{ end }}
