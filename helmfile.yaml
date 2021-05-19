@@ -56,6 +56,6 @@ releases:
     values:
       # load default values
       - config/{{ $value.chartName }}/values.yaml
-      # load stage specific overwrite values
+      # load stage specific values
       - config/{{ $value.chartName }}/values.{{ $environmentName }}.yaml
   {{ end }}

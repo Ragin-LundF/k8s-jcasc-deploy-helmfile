@@ -1,0 +1,3 @@
+configmaps:
+  - name: "REDDOT_APPNAME"
+    value: "staging-dev"

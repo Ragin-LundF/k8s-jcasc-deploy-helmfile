@@ -20,6 +20,17 @@ The file for helmfile that describes the deployment.
 This is a very generic one that can read the configuration from the `config` directory.
 There are the definitions of the application Helm charts and the configurations.
 
+## /config/*
+
+Contains subdirectories with the chart names.
+The chartnames will be resolved at `helmfile.yaml` via `/environments/*` files and it contains files with the naming convention:
+- `values.yaml` - default values, which are valid for all stages.
+- `values-<env>.yaml` - contains environment specific configurations.
+
+## /environments/*
+
+This is the basis for the application and contains the definition of the applications, which should be deployed.
+
 
 # Deployment #
 
