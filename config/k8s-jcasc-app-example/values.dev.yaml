@@ -1,3 +1,2 @@
 reddot:
-  env:
-    appname: reddot-dev
+  appname: reddot-dev

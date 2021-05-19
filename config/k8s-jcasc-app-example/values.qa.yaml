@@ -1,3 +1,2 @@
 reddot:
-  env:
-    appname: reddot-qa
+  appname: reddot-qa
