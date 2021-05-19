@@ -20,5 +20,6 @@ charts:
     # chart name of pgadmin
     chartName: "pgadmin4"
     helmRepository: "runix"
-  postgres:
-    chartName: "postgresql"
+  # removed to save memory
+#  postgres:
+#    chartName: "postgresql"
